@@ -58,6 +58,74 @@
                     </a>
 
                 </form>
+                @if(session('success'))
+                    <div class="alert alert-success mt-3">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <h5 class="mt-3">{{ __('Photos') }}</h5>
+
+                @if($car->photos->isNotEmpty())
+                    <div class="d-flex flex-wrap gap-3 mb-3">
+
+                        @foreach($car->photos as $photo)
+                            <div class="text-center">
+
+                                <img
+                                    src="{{ Storage::url($photo->path) }}"
+                                    alt="Car photo"
+                                    style="width:150px; height:100px; object-fit:cover; border-radius:6px;"
+                                >
+
+                                <form
+                                    action="{{ route('cars.photos.destroy', $photo) }}"
+                                    method="POST"
+                                    class="mt-1"
+                                    onsubmit="return confirm('Delete this photo?')"
+                                >
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        🗑 {{ __('Delete') }}
+                                    </button>
+                                </form>
+
+                            </div>
+                        @endforeach
+
+                    </div>
+                @else
+                    <p class="text-muted">{{ __('No photos yet.') }}</p>
+                @endif
+
+                <form
+                    action="{{ route('cars.photos.store', $car) }}"
+                    method="POST"
+                    enctype="multipart/form-data"
+                    class="mt-2"
+                >
+                    @csrf
+
+                    <div class="mb-3">
+                        <label class="form-label">{{ __('Upload Photos') }}</label>
+                        <input
+                            type="file"
+                            name="photos[]"
+                            class="form-control @error('photos.*') is-invalid @enderror"
+                            multiple
+                            accept="image/*"
+                        >
+                        @error('photos.*')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        ⬆ {{ __('Upload') }}
+                    </button>
+
+                </form>
 
             </div>
         </div>

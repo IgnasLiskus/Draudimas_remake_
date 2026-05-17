@@ -11,7 +11,7 @@ class CarController extends Controller
 {
     public function index()
     {
-        $cars = Car::with('owner')->get();
+        $cars = Car::with(['owner', 'photos'])->get();
         return view('cars.index', compact('cars'));
     }
     public function create()
@@ -53,6 +53,7 @@ class CarController extends Controller
             abort(403);
         }
 
+        $car->load('photos');
         $owners = Owner::all();
         return view('cars.edit', compact('car', 'owners'));
     }
