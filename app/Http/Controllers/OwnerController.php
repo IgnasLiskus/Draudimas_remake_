@@ -27,6 +27,10 @@ class OwnerController extends Controller
 
     public function edit(Owner $owner)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403);
+        }
+
         return view('owners.edit', compact('owner'));
     }
 
@@ -42,5 +46,10 @@ class OwnerController extends Controller
         $owner->delete();
 
         return redirect('/owners');
+    }
+
+    public function __construct()
+    {
+        $this->middleware('auth');
     }
 }
