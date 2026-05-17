@@ -7,15 +7,11 @@
         <div class="d-flex justify-content-between mb-3">
             <h2>{{ __('translation.car_owners') }}</h2>
 
-            @auth
-                @if(auth()->user()->role == 'admin')
-            <a href="{{ route('owners.create') }}" class="btn btn-primary">
-                {{ __('translation.add_owner') }}
-            </a>
-                @endif
-            @endauth
-
-
+            @can('create', App\Models\Owner::class)
+                <a href="{{ route('owners.create') }}" class="btn btn-primary">
+                    {{ __('translation.add_owner') }}
+                </a>
+            @endcan
         </div>
 
         <div class="card">
@@ -36,43 +32,33 @@
                     </thead>
 
                     <tbody>
-
                     @foreach($owners as $owner)
-
                         <tr>
-
                             <td>{{ $owner->id }}</td>
                             <td>{{ $owner->name }}</td>
                             <td>{{ $owner->surname }}</td>
                             <td>{{ $owner->phone }}</td>
                             <td>{{ $owner->email }}</td>
                             <td>{{ $owner->address }}</td>
-
                             <td>
-                                @auth
-                                    @if(auth()->user()->role == 'admin')
-                                <a href="{{ route('owners.edit',$owner->id) }}" class="btn btn-warning btn-sm">
-                                    {{ __('translation.edit') }}
-                                </a>
+                                @can('update', $owner)
+                                    <a href="{{ route('owners.edit', $owner->id) }}" class="btn btn-warning btn-sm">
+                                        {{ __('translation.edit') }}
+                                    </a>
+                                @endcan
 
-                                <form action="{{ route('owners.destroy',$owner->id) }}" method="POST" style="display:inline">
-
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button class="btn btn-danger btn-sm">
-                                        {{ __('translation.delete') }}
-                                    </button>
-
-                                </form>
-                                    @endif
-                                @endauth
+                                @can('delete', $owner)
+                                    <form action="{{ route('owners.destroy', $owner->id) }}" method="POST" style="display:inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger btn-sm">
+                                            {{ __('translation.delete') }}
+                                        </button>
+                                    </form>
+                                @endcan
                             </td>
-
                         </tr>
-
                     @endforeach
-
                     </tbody>
 
                 </table>

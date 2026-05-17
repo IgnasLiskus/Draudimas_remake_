@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Owner extends Model
 {
@@ -11,12 +13,17 @@ class Owner extends Model
         'surname',
         'phone',
         'email',
-        'address'
+        'address',
+        'user_id',      // add this
     ];
 
-    public function cars()
+    public function cars(): HasMany
     {
         return $this->hasMany(Car::class);
     }
-}
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+}

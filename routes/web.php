@@ -16,10 +16,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/lang/{lang}', [LangController::class, 'changeLanguage'])->name('lang.change');
 
-
-
-
-// VISI prisijungę gali MATYTI
 Route::middleware('auth')->group(function () {
     Route::resource('owners', OwnerController::class);
     Route::resource('cars', CarController::class);
@@ -28,15 +24,4 @@ Route::middleware('auth')->group(function () {
         ->name('cars.photos.store');
     Route::delete('/cars/photos/{photo}', [CarPhotoController::class, 'destroy'])
         ->name('cars.photos.destroy');
-});
-
-// TIK ADMIN gali CRUD
-Route::middleware(['auth', 'role'])->group(function () {
-
-    Route::resource('owners', OwnerController::class)
-        ->except(['index', 'show']);
-
-    Route::resource('cars', CarController::class)
-        ->except(['index', 'show']);
-
 });

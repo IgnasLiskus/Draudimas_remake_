@@ -8,13 +8,11 @@
         <div class="d-flex justify-content-between mb-3">
             <h2>{{ __('translation.cars') }}</h2>
 
-            @auth
-                @if(auth()->user()->role == 'admin')
-                    <a href="{{ route('cars.create') }}" class="btn btn-primary mb-3">
-                        {{ __('translation.add_car') }}
-                    </a>
-                @endif
-            @endauth
+            @can('create', App\Models\Car::class)
+                <a href="{{ route('cars.create') }}" class="btn btn-primary mb-3">
+                    {{ __('translation.add_car') }}
+                </a>
+            @endcan
         </div>
 
         <div class="card">
@@ -35,7 +33,6 @@
                     </thead>
 
                     <tbody>
-
                     @foreach($cars as $car)
                         <tr>
                             <td>{{ $car->id }}</td>
@@ -43,8 +40,6 @@
                             <td>{{ $car->brand }}</td>
                             <td>{{ $car->model }}</td>
                             <td>{{ $car->owner->name }} {{ $car->owner->surname }}</td>
-
-                            {{-- Photos column --}}
                             <td>
                                 @if($car->photos->isNotEmpty())
                                     <div class="d-flex flex-wrap gap-1">
@@ -60,26 +55,23 @@
                                     <span class="text-muted">—</span>
                                 @endif
                             </td>
-
                             <td>
-                                @auth
-                                    @if(auth()->user()->role == 'admin')
-                                        <a href="/cars/{{ $car->id }}/edit" class="btn btn-warning btn-sm">
-                                            {{ __('translation.edit') }}
-                                        </a>
+                                @can('update', $car)
+                                    <a href="/cars/{{ $car->id }}/edit" class="btn btn-warning btn-sm">
+                                        {{ __('translation.edit') }}
+                                    </a>
+                                @endcan
 
-                                        <form action="{{ route('cars.destroy', $car->id) }}" method="POST" style="display:inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger btn-sm">{{ __('translation.delete') }}</button>
-                                        </form>
-                                    @endif
-                                @endauth
+                                @can('delete', $car)
+                                    <form action="{{ route('cars.destroy', $car->id) }}" method="POST" style="display:inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger btn-sm">{{ __('translation.delete') }}</button>
+                                    </form>
+                                @endcan
                             </td>
-
                         </tr>
                     @endforeach
-
                     </tbody>
 
                 </table>
