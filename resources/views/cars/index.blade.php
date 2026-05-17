@@ -43,7 +43,7 @@
                             <td>{{ $car->reg_number }}</td>
                             <td>{{ $car->brand }}</td>
                             <td>{{ $car->model }}</td>
-                            <td>{{ $car->owner_id }}</td>
+                            <td>{{ $car->owner->name }} {{ $car->owner->surname }}</td>
 
                             <td>
                                 @auth

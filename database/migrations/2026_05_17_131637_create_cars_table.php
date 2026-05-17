@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
-            $table->string('reg_number');
-            $table->string('brand');
-            $table->string('model');
+            $table->string('reg_number', 6)->unique();
+            $table->string('brand', 50);
+            $table->string('model', 50);
             $table->foreignId('owner_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

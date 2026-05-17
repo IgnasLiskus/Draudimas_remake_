@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // TIK ADMIN gali CRUD
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth', 'role'])->group(function () {
 
     Route::resource('owners', OwnerController::class)
         ->except(['index', 'show']);

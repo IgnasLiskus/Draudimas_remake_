@@ -21,7 +21,7 @@ return [
     'reg_number'=>'Registracijos numeris',
     'brand'=>'Gamintojas',
     'model'=>'Modelis',
-    'owner_ID'=>'Sąvininko ID',
+    'owner_ID'=>'Sąvininkas',
     'edit_car'=>'Redaguoti automobilį',
 
     'Owners'=>'Sąvinkai',
