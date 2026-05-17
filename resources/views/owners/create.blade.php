@@ -7,7 +7,7 @@
         <div class="card">
 
             <div class="card-header">
-                <h3>Pridėti sąvininką</h3>
+                <h3>{{ __('translation.add_owner') }}</h3>
             </div>
 
             <div class="card-body">
@@ -27,36 +27,36 @@
                     @csrf
 
                     <div class="mb-3">
-                        <label class="form-label">Vardas</label>
+                        <label class="form-label">{{ __('translation.name') }}</label>
                         <input type="text" name="name" class="form-control">
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Pavardė</label>
+                        <label class="form-label">{{ __('translation.surname') }}</label>
                         <input type="text" name="surname" class="form-control">
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Tel. numeris</label>
+                        <label class="form-label">{{ __('translation.phone_number') }}</label>
                         <input type="text" name="phone" class="form-control">
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">E. paštas</label>
+                        <label class="form-label">{{ __('translation.E_mail') }}</label>
                         <input type="email" name="email" class="form-control">
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Adresas</label>
+                        <label class="form-label">{{ __('translation.address') }}</label>
                         <input type="text" name="address" class="form-control">
                     </div>
 
                     <button class="btn btn-success">
-                        Išsaugoti
+                        {{ __('translation.save') }}
                     </button>
 
                     <a href="{{ route('owners.index') }}" class="btn btn-secondary">
-                        Atgal
+                        {{ __('translation.back') }}
                     </a>
 
                 </form>

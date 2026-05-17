@@ -30,13 +30,18 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        <a class="navbar-brand" href="/owners">Savininkai</a>
-                        <a class="navbar-brand ms-3" href="/cars">Automobiliai</a>
+                        <a class="navbar-brand" href="/owners">{{ __('translation.Owners') }}</a>
+                        <a class="navbar-brand ms-3" href="/cars">{{ __('translation.Cars') }}</a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+
+                        <!-- Language Selectors -->
+                        <a href="{{ route('lang.change', 'lt') }}" class="nav-link">LT</a>
+                        <a href="{{ route('lang.change', 'en') }}" class="nav-link">EN</a>
                         <!-- Authentication Links -->
+
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">

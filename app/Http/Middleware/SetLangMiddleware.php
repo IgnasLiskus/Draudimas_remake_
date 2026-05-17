@@ -4,19 +4,20 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Symfony\Component\HttpFoundation\Response;
 
-class RoleMiddleware
+class SetLangMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->check()) {
-            return redirect('/login');
-        }
+        if ($request->session()->has('locale')) {
 
-        if (auth()->user()->role !== 'admin') {
+            App::setLocale($request->session()->get('locale'));
 
-            abort(403, 'Neturite teisių');
+        } else {
+
+            App::setLocale(config('app.locale'));
         }
 
         return $next($request);

@@ -7,7 +7,7 @@
         <div class="card">
 
             <div class="card-header">
-                <h3>Pridėti automobilį</h3>
+                <h3>{{ __('translation.add_car') }}</h3>
             </div>
 
             <div class="card-body">
@@ -27,31 +27,31 @@
                     @csrf
 
                     <div class="mb-3">
-                        <label class="form-label">Reg. numeris</label>
+                        <label class="form-label">{{ __('translation.reg_number') }}</label>
                         <input type="text" name="reg_number" class="form-control">
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Gamintojas</label>
+                        <label class="form-label">{{ __('translation.brand') }}</label>
                         <input type="text" name="brand" class="form-control">
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Modelis</label>
+                        <label class="form-label">{{ __('translation.model') }}</label>
                         <input type="text" name="model" class="form-control">
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Sąvininko ID</label>
+                        <label class="form-label">{{ __('translation.owner_ID') }}</label>
                         <input type="text" name="owner_id" class="form-control">
                     </div>
 
                     <button class="btn btn-success">
-                        Išsaugoti
+                        {{ __('translation.save') }}
                     </button>
 
                     <a href="{{ route('cars.index') }}" class="btn btn-secondary">
-                        Atgal
+                        {{ __('translation.back') }}
                     </a>
 
                 </form>

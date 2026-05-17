@@ -5,11 +5,15 @@
     <div class="container mt-4">
 
         <div class="d-flex justify-content-between mb-3">
-            <h2>Automobiliai</h2>
+            <h2>{{ __('translation.cars') }}</h2>
 
+            @auth
+                @if(auth()->user()->role == 'admin')
             <a href="{{ route('cars.create') }}" class="btn btn-primary mb-3">
-                Pridėti automobilį
+                {{ __('translation.add_car') }}
             </a>
+                @endif
+            @endauth
 
         </div>
 
@@ -20,12 +24,12 @@
 
                     <thead class="table-dark">
                     <tr>
-                        <th>ID</th>
-                        <th>Reg. numeris</th>
-                        <th>Gamintojas</th>
-                        <th>Modelis</th>
-                        <th>Savininko ID</th>
-                        <th>Veiksmai</th>
+                        <th>{{ __('translation.ID') }}</th>
+                        <th>{{ __('translation.reg_number') }}</th>
+                        <th>{{ __('translation.brand') }}</th>
+                        <th>{{ __('translation.model') }}</th>
+                        <th>{{ __('translation.owner_ID') }}</th>
+                        <th>{{ __('translation.actions') }}</th>
                     </tr>
                     </thead>
 
@@ -42,17 +46,19 @@
                             <td>{{ $car->owner_id }}</td>
 
                             <td>
-
+                                @auth
+                                    @if(auth()->user()->role == 'admin')
                                 <a href="/cars/{{ $car->id }}/edit" class="btn btn-warning btn-sm">
-                                    Redaguoti
+                                    {{ __('translation.edit') }}
                                 </a>
 
                                 <form action="{{ route('cars.destroy',$car->id) }}" method="POST" style="display:inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                    <button class="btn btn-danger btn-sm">{{ __('translation.delete') }}</button>
                                 </form>
-
+                                    @endif
+                                @endauth
                             </td>
 
                         </tr>
